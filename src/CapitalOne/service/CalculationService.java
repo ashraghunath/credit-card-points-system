@@ -5,6 +5,10 @@ import CapitalOne.model.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class that performs the calculation of the points
+ * @author Ashwin Raghunath
+ */
 public class CalculationService {
 
     Customer customer;

@@ -94,6 +94,7 @@ public class Application {
 
         Customer customer = new Customer(transactionList);
         customer.calculateScore();
+        scanner.close();
     }
 
     /**

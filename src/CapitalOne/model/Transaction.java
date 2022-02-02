@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class representing a single transaction with it's attributes
+ * Class representing a single transaction with its attributes
+ * @author Ashwin Raghunath
  */
 public class Transaction {
 
