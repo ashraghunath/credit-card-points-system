@@ -1,5 +1,7 @@
 package CapitalOne.model;
 
+import CapitalOne.service.CalculationService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,130 +63,112 @@ public class Customer {
      */
     public void calculateScore()
     {
-        List<Integer> scores = new ArrayList<>();
-        if(sportcheckAmountDollars>=75 && tim_hortonsAmountDollars>=25 && subwayAmountDollars>=25)
-            scores.add(applyRule1() + applyRule7(temp));
-        if(sportcheckAmountDollars>=75 && tim_hortonsAmountDollars>=25)
-            scores.add(applyRule2() + applyRule7(temp));
-        if(sportcheckAmountDollars>=75)
-            scores.add(applyRule3() + applyRule7(temp));
-        if(sportcheckAmountDollars>=25 && tim_hortonsAmountDollars>=10 && subwayAmountDollars>=10)
-            scores.add(applyRule4() + applyRule7(temp));
-        if(sportcheckAmountDollars>=25 && tim_hortonsAmountDollars>=10)
-            scores.add(applyRule5() + applyRule7(temp));
-        if(sportcheckAmountDollars>=20)
-            scores.add(applyRule6() + applyRule7(temp));
-        if(scores.size()==0)
-            scores.add(applyRule7(totalAmountDollars));
-
-        score = scores.stream().mapToInt(i -> i).max().orElse(0);
-
-        System.out.println("Credit card points : "+score);
+        CalculationService service = new CalculationService(this);
+        service.calculateScore();
     }
 
-    public int applyRule1()
-    {
-        int points=0;
-        int sportCheck=sportcheckAmountDollars;
-        int timHortons=tim_hortonsAmountDollars;
-        int subway=subwayAmountDollars;
-        while (sportCheck>=75 && timHortons>=25 && subway>=25)
-        {
-            points+=500;
-            sportCheck-=75;
-            timHortons-=25;
-            subway-=25;
-        }
-        temp=totalAmountDollars-(sportcheckAmountDollars+tim_hortonsAmountDollars+subwayAmountDollars)+sportCheck+subway+timHortons;
-        return points;
+
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public int applyRule2()
-    {
-        int points=0;
-        int sportCheck=sportcheckAmountDollars;
-        int timHortons=tim_hortonsAmountDollars;
-        while (sportCheck>=75 && timHortons>=25)
-        {
-            points+=300;
-            sportCheck-=75;
-            timHortons-=25;
-        }
-        temp=totalAmountDollars-(sportcheckAmountDollars+tim_hortonsAmountDollars)+sportCheck+timHortons;
-        return points;
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
-    public int applyRule3()
-    {
-        int points=0;
-        int sportCheck=sportcheckAmountDollars;
-        while (sportCheck>=75)
-        {
-            points+=200;
-            sportCheck-=75;
-        }
-        temp=totalAmountDollars-(sportcheckAmountDollars)+sportCheck;
-        return points;
+    public int getSportcheckAmount() {
+        return sportcheckAmount;
     }
 
-    public int applyRule4()
-    {
-        int points=0;
-        int sportCheck=sportcheckAmountDollars;
-        int timHortons=tim_hortonsAmountDollars;
-        int subway=subwayAmountDollars;
-        while (sportCheck>=25 && timHortons>=10 && subway>=10)
-        {
-            points+=150;
-            sportCheck-=25;
-            timHortons-=10;
-            subway-=10;
-        }
-        temp=totalAmountDollars-(sportcheckAmountDollars+tim_hortonsAmountDollars+subwayAmountDollars)+sportCheck+timHortons+subway;
-        return points;
+    public void setSportcheckAmount(int sportcheckAmount) {
+        this.sportcheckAmount = sportcheckAmount;
     }
 
-    public int applyRule5()
-    {
-        int points=0;
-        int sportCheck=sportcheckAmountDollars;
-        int timHortons=tim_hortonsAmountDollars;
-        while (sportCheck>=25 && timHortons>=10)
-        {
-            points+=75;
-            sportCheck-=25;
-            timHortons-=10;
-        }
-        temp=totalAmountDollars-(sportcheckAmountDollars+tim_hortonsAmountDollars)+sportCheck+timHortons;
-        return points;
+    public int getSubwayAmount() {
+        return subwayAmount;
     }
 
-    public int applyRule6()
-    {
-        int points=0;
-        int sportCheck=sportcheckAmountDollars;
-
-        while (sportCheck>=20 )
-        {
-            points+=75;
-            sportCheck-=20;
-
-        }
-        temp=totalAmountDollars-(sportcheckAmountDollars)+sportCheck;
-        return points;
+    public void setSubwayAmount(int subwayAmount) {
+        this.subwayAmount = subwayAmount;
     }
 
-    public int applyRule7(int remainingAmount)
-    {
-        int points=0;
-
-        while (remainingAmount>=1 )
-        {
-            points+=1;
-            remainingAmount-=1;
-
-        }
-        return points;
+    public int getTim_hortonsAmount() {
+        return tim_hortonsAmount;
     }
 
+    public void setTim_hortonsAmount(int tim_hortonsAmount) {
+        this.tim_hortonsAmount = tim_hortonsAmount;
+    }
+
+    public int getOtherAmount() {
+        return otherAmount;
+    }
+
+    public void setOtherAmount(int otherAmount) {
+        this.otherAmount = otherAmount;
+    }
+
+    public int getOtherAmountDollars() {
+        return otherAmountDollars;
+    }
+
+    public void setOtherAmountDollars(int otherAmountDollars) {
+        this.otherAmountDollars = otherAmountDollars;
+    }
+
+    public int getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(int totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public int getTotalAmountDollars() {
+        return totalAmountDollars;
+    }
+
+    public void setTotalAmountDollars(int totalAmountDollars) {
+        this.totalAmountDollars = totalAmountDollars;
+    }
+
+    public int getSportcheckAmountDollars() {
+        return sportcheckAmountDollars;
+    }
+
+    public void setSportcheckAmountDollars(int sportcheckAmountDollars) {
+        this.sportcheckAmountDollars = sportcheckAmountDollars;
+    }
+
+    public int getSubwayAmountDollars() {
+        return subwayAmountDollars;
+    }
+
+    public void setSubwayAmountDollars(int subwayAmountDollars) {
+        this.subwayAmountDollars = subwayAmountDollars;
+    }
+
+    public int getTim_hortonsAmountDollars() {
+        return tim_hortonsAmountDollars;
+    }
+
+    public void setTim_hortonsAmountDollars(int tim_hortonsAmountDollars) {
+        this.tim_hortonsAmountDollars = tim_hortonsAmountDollars;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getRemainingAmount() {
+        return remainingAmount;
+    }
+
+    public void setRemainingAmount(int remainingAmount) {
+        this.remainingAmount = remainingAmount;
+    }
 }
