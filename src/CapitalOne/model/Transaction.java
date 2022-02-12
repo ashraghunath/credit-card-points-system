@@ -102,8 +102,8 @@ public class Transaction {
             return true;
         if(!(obj instanceof Transaction))
             return false;
-        Transaction vaccine = (Transaction) obj;
-        return vaccine.id==this.id && vaccine.merchant_code==this.merchant_code;
+        Transaction transaction = (Transaction) obj;
+        return transaction.id==this.id && transaction.merchant_code==this.merchant_code && transaction.date==this.date;
     }
 }
 
