@@ -13,7 +13,6 @@ public class Transaction {
     private String date;
     private Merchant_Code merchant_code;
     private int amount_cents;
-    private int transactionScore;
 
     static int idCount=0;
 
@@ -78,14 +77,6 @@ public class Transaction {
         this.amount_cents = amount_cents;
     }
 
-    public int getTransactionScore() {
-        return transactionScore;
-    }
-
-    public void setTransactionScore(int transactionScore) {
-        this.transactionScore = transactionScore;
-    }
-
     @Override
     public String toString() {
         return
@@ -100,7 +91,6 @@ public class Transaction {
     public int hashCode() {
         int hash = 17;
         hash = (37*hash+this.amount_cents);
-        hash = (37*hash+this.transactionScore);
         hash = 37*hash+id.hashCode();
         hash = 37*hash+merchant_code.hashCode();
         return hash;
